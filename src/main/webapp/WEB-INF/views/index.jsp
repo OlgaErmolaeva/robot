@@ -34,25 +34,38 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                              <li><a href="../onDemand/EMPIK">Empik</a></li>
-                                                    <li><a href="../onDemand/PUBLIO">Publio</a></li>
-                                                    <li><a href="../onDemand/PACT">Pact</a></li>
-                                                    <li><a href="../onDemand/HELION">Helion</a></li>
-
+                            <li><a href="../onDemand/EMPIK">Empik</a></li>
+                            <li><a href="../onDemand/PUBLIO">Publio</a></li>
+                            <li><a href="../onDemand/PACT">Pact</a></li>
+                            <li><a href="../onDemand/HELION">Helion</a></li>
                         </ul>
                     </div>
                 </form>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form action="login" method="post" class="navbar-form navbar-right">
-                    <div class="form-group">
-                    <a href="/myProfile" class="btn btn-success">My Profile</a>
-                    <a href="../../register" class="btn btn-success">Sign up</a>
-                </form>
+                <div class="form-group">
+                    <form id="login" action="/myProfile" method="get" class="navbar-form navbar-right">
+
+                    </form>
+                    <c:if test="${pageContext.request.userPrincipal.name == null}">
+                        <a href="javascript:document.getElementById('login').submit()" class="btn btn-success">Login</a>
+                        <a href="../../register" class="btn btn-info">Sign up</a>
+                    </c:if>
+
+                    <c:url value="/logout" var="logoutUrl"/>
+                    <form id="logout" action="${logoutUrl}" method="post" class="navbar-form navbar-right">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <a href="javascript:document.getElementById('logout').submit()"
+                           class="btn btn-danger">Logout</a>
+                        <a href="/myProfile" class="btn btn-info">My Profile</a>
+                    </c:if>
             </ul>
         </div>
     </div>
-    <h1> SHOW ${session.getAttribute("username")}</h1>
+
 </nav>
+<h1> SHOW ${userName}</h1>
 </body>
 </html>
