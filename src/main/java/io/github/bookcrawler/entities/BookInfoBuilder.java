@@ -11,7 +11,7 @@ public class BookInfoBuilder {
     String library;
     String url;
     Date inputDate;
-    Author author;
+    String author;
     Set<Tag> tags;
 
     public BookInfoBuilder title(String title) {
@@ -39,7 +39,7 @@ public class BookInfoBuilder {
         return this;
     }
 
-    public BookInfoBuilder author(Author authorName) {
+    public BookInfoBuilder author(String authorName) {
         this.author = authorName;
         return this;
     }
@@ -49,8 +49,8 @@ public class BookInfoBuilder {
         return this;
     }
 
-    public BookInfoBuilder inputDate(Long inputDate) {
-        this.inputDate = new Date(inputDate);
+    public BookInfoBuilder inputDate(Date inputDate) {
+        this.inputDate = inputDate;
         return this;
     }
 

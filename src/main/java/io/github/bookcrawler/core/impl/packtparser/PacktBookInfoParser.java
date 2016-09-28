@@ -1,6 +1,5 @@
 package io.github.bookcrawler.core.impl.packtparser;
 
-import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
@@ -11,15 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PacktBookInfoParser implements BookInfoParser {
 
-    @Autowired
-    AuthorsCache authorsCache;
-
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         return new BookInfoBuilder()
                 .title(sourceScrappingResult.parsePacktTitle())
                 .url(sourceScrappingResult.location())
-                .author(authorsCache.getAuthorFromCache(sourceScrappingResult.parsePacktAuthor().replaceAll("[^A-Za-z\\p{L}]", " ").trim()))
+                .author(sourceScrappingResult.parsePacktAuthor().replaceAll("[^A-Za-z\\p{L}]", " ").trim())
+                .inputDate(new java.sql.Date(new java.util.Date().getTime()))
                 .description(sourceScrappingResult.parsePacktDescription())
                 .library(sourceScrappingResult.parsePactLibrary())
                 .price(sourceScrappingResult.parsePactPrice())

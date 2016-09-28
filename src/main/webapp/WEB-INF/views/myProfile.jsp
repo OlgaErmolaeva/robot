@@ -1,12 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <jsp:include page="index.jsp"/>
-    <script src="<c:url value="/resources/js/main.js" />"></script>
-</head>
-<body>
-<h1>My Profile</h1>
-</body>
-</html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<h3>Welcome to JournalDEV Tutorials</h3>
+<ul>
+	<li>Java 8 tutorial</li>
+	<li>Spring tutorial</li>
+	<li>Gradle tutorial</li>
+	<li>BigData tutorial</li>
+</ul>
+
+<c:url value="/logout" var="logoutUrl" />
+<form id="logout" action="${logoutUrl}" method="post" >
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<a href="javascript:document.getElementById('logout').submit()">Logout</a>
+	<a href = "/">Home page</a>
+</c:if>

@@ -46,17 +46,13 @@
             <ul class="nav navbar-nav navbar-right">
                 <form action="login" method="post" class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" name="login" placeholder="login" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <a href="/myProfile" class="btn btn-success">My Profile</a>
                     <a href="../../register" class="btn btn-success">Sign up</a>
                 </form>
             </ul>
         </div>
     </div>
+    <h1> SHOW ${session.getAttribute("username")}</h1>
 </nav>
 </body>
 </html>

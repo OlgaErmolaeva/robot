@@ -1,9 +1,7 @@
 package io.github.bookcrawler.core.impl.packtparser;
 
-import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.core.impl.SourceScrappingStatus;
-import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,8 +21,6 @@ public class PacktBookInfoParserTest {
     public void testParsingBookElementsFromDocument() throws IOException {
         //given
         PacktBookInfoParser packtBookInfoParser = new PacktBookInfoParser();
-        AuthorsCache authorsCache = mock(AuthorsCache.class);
-        packtBookInfoParser.authorsCache = authorsCache;
         Document source = Jsoup.parse(new File("src/test/java/io/github/bookcrawler/core/" +
                 "impl/packtparser/mastering_casandra_packt.html"), "UTF-8");
         SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(source, SourceScrappingStatus.SUCCESS);
@@ -37,7 +33,6 @@ public class PacktBookInfoParserTest {
         String expectedPrice = "free";
         String expectedLibrary = "Packt";
 
-        when(authorsCache.getAuthorFromCache(expectedAuthor)).thenReturn(new Author(expectedAuthor));
 
         //when
         BookInfo book = packtBookInfoParser.parse(sourceScrappingResult);

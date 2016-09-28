@@ -1,9 +1,7 @@
 package io.github.bookcrawler.core.impl.empik;
 
-import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.core.impl.SourceScrappingStatus;
-import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,11 +31,8 @@ public class EmpikBookInfoParserTest {
 
         // given
         EmpikBookInfoParser empikBookInfoParser = new EmpikBookInfoParser();
-        AuthorsCache authorsCache = mock(AuthorsCache.class);
-        empikBookInfoParser.authorsCache = authorsCache;
-        Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
-        when(authorsCache.getAuthorFromCache(author)).thenReturn(new Author(author));
+        Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
         SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(testedSource, SourceScrappingStatus.SUCCESS);
 

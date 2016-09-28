@@ -20,15 +20,14 @@ public class ScheduledDatabaseOperation {
 
     @Autowired
     DatabaseCacheForDifferentLibraries databaseCacheForDifferentLibraries;
-    @Autowired
-    AuthorsCache authorsCache;
+
 
     @Autowired
     BookInfoRepository bookInfoRepository;
 
-    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 28 15 * * ?")
     private void schedulerJob() {
-        authorsCache.saveAuthorsFromDBInCache();
+
         EnumSet.allOf(Library.class).stream().
                 forEach(libraries -> databaseCacheForDifferentLibraries.putBookInfoFromLibrary(libraries.toString(), discountFetchingService.getBooksFromLibrary(libraries)));
         bookInfoRepository.save(databaseCacheForDifferentLibraries.getAllBookInfos());

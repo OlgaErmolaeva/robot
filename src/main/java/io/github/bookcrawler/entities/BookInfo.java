@@ -14,7 +14,7 @@ public class BookInfo implements Serializable {
 
     private String title;
 
-    @Column(length = 10000)
+    @Lob
     private String description;
 
     private String price;
@@ -23,9 +23,8 @@ public class BookInfo implements Serializable {
 
     private String url;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author author;
+
+    private String author;
 
     private Date inputDate;
 
@@ -56,7 +55,7 @@ public class BookInfo implements Serializable {
 
 
     public String getAuthor() {
-        return author.getName();
+        return author;
     }
 
     public String getDescription() {

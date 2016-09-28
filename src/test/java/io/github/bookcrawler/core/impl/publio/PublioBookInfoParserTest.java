@@ -1,9 +1,7 @@
 package io.github.bookcrawler.core.impl.publio;
 
-import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.core.impl.SourceScrappingStatus;
-import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,9 +30,6 @@ public class PublioBookInfoParserTest {
     public void parsesPublioBook(String path, String title, String author, String description, String price, String library) throws IOException {
         // given
         PublioBookInfoParser publioBookInfoParser = new PublioBookInfoParser();
-        AuthorsCache authorsCache = mock(AuthorsCache.class);
-        publioBookInfoParser.authorsCache = authorsCache;
-        when(authorsCache.getAuthorFromCache(author)).thenReturn(new Author(author));
         Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
         SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(testedSource, SourceScrappingStatus.SUCCESS);
