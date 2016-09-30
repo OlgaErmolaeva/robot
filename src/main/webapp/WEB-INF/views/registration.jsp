@@ -1,48 +1,61 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page session="false"%>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title><spring:message code="label.form.title"></spring:message></title>
 </head>
 <body>
-<div class="container">
-    <p>
-        <form:form action="/register" method="post" modelAttribute="user">
-    <h3>Register your Account</h3>
-    <table>
-        <tr>
-            <td>
-                <form:label path="name">Name</form:label>
-            </td>
-            <td>
-                <form:input path="name"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="login">Login</form:label>
-            </td>
-            <td>
-                <form:input path="login"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="password">Password</form:label>
-            </td>
-            <td>
-                <form:input path="password"/>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Submit"/></td>
-        </tr>
-    </table>
+    <h1>
+        <spring:message code="label.form.title"></spring:message>
+    </h1>
+    <form:form modelAttribute="user" method="POST" enctype="utf8">
+        <br>
+        <tr><td>
+            <label>
+              <spring:message code="label.user.name"></spring:message>
+            </label>
+        </td>
+    <td><form:input path="name" value="" /></td>
+    <form:errors path="name" element="div"/>
+    </tr>
+
+    <tr><td>
+            <label>
+                <spring:message code="label.user.login"></spring:message>
+            </label>
+        </td>
+    <td><form:input path="login" value="" /></td>
+    <form:errors path="login" element="div" />
+    </tr>
+    <tr><td>
+            <label>
+                <spring:message code="label.user.password"></spring:message>
+            </label>
+        </td>
+    <td>
+            <form:input path="password" value="" type="password" /></td>
+    <form:errors path="password" element="div" />
+    </tr>
+    <tr><td>
+            <label>
+                <spring:message code="label.user.confirmPass"></spring:message>
+            </label>
+        </td>
+    <td><form:input path="matchingPassword" value="" type="password" /></td>
+    <form:errors element="div" />
+    </tr>
+        <button type="submit">
+          <spring:message code="label.form.submit"></spring:message>
+        </button>
     </form:form>
-</div>
+    <br>
+    <a href="/loginPage" />
+        <spring:message code="label.form.loginLink"></spring:message>
+    </a>
 </body>
+</html>

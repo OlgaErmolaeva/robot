@@ -5,12 +5,12 @@ import io.github.bookcrawler.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
+import javax.validation.Valid;
 
 @Controller
 public class RegistrationAndLoginController {
@@ -25,8 +25,10 @@ public class RegistrationAndLoginController {
     }
 
     @PostMapping(value = "/register")
-    public String register(@ModelAttribute("user") RobotUser user) {
-        userRepository.save(user);
+    public String register(@ModelAttribute("user") @Valid RobotUser user, BindingResult result,Errors errors) {
+        if (!result.hasErrors()) {
+            userRepository.save(user);
+        }
         return "index";
     }
 
